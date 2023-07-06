@@ -1,0 +1,43 @@
+<%- include('../partials/header') %>
+
+<h2>Enter a New Flight</h2>
+<form action="/flights" method="POST">
+  <!-- airline field will have a predetermined enum to include bunch of airline names -->
+  <label>Airline:
+    <input type="text" name="Airline" list="airlines">
+    <datalist id="airlines">
+      <option value="American Airlines"></option>
+      <option value="Southwest"></option>
+      <option value="Delta"></option>
+      <option value="Turkish Airlines"></option>
+    </datalist>
+  </label><br>
+
+  <!-- airport field will have a predetermined enum to include bunch of airport names with a default option of "IST" -->
+
+  <label>Airport:
+    <input type="string" name="airport" list="airports" placeholder="IST">
+    <datalist id="airports">
+      <option value="IST"></option>
+      <option value="JFK"></option>
+      <option value="LAX"></option>
+      <option value="LHR"></option>
+    </datalist>
+  </label><br>
+
+  <!-- flightNo field will have a range of numbers between 10 and 9999 -->
+  <label>flightNo:
+    <input type="number" name="flightNo" min="10" max="9999">
+  </label><br>
+
+  <label>Cast (separate actors with commas):
+    <input type="text" name="cast">
+  </label><br>
+  <label>Now Showing:
+    <input type="checkbox" name="nowShowing" checked>
+  </label><br>
+  <button type="submit">Add Movie</button>
+</form>
+<p><%= errorMsg %></p>
+
+<%- include('../partials/footer') %>
