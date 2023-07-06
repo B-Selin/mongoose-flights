@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 require('dotenv').config();
 
+//  the code in a Node module doesn’t execute until the module is required, therefore, to connect to the database, we’ll require database.js in server.js:
 require('./config/database');
 
 var indexRouter = require('./routes/index');

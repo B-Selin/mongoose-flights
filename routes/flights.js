@@ -1,18 +1,19 @@
 var express = require('express');
 var router = express.Router();
-const flightCtrl = require('../controllers/flight');
+const flightsCtrl = require('../controllers/flights');
+
+
+
 
 // get new listiung with GET, /flights/new
-router.get('/new', flightCtrl.new);
-
-
+router.get('/new', flightsCtrl.new);
 
 // POST /flights
 
-router.post('/', flightCtrl.create)
+router.post('/', flightsCtrl.create)
 
 // GET '/' listing.
-router.get('/', flightCtrl.index)
+router.get('/', flightsCtrl.index)
 
 /* GET users listing. */
 // router.get('/', function(req, res, next) {
