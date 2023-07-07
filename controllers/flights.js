@@ -5,11 +5,25 @@ module.exports = {
   create,
   index,
   show,
-  addDestination,
 };
+
+async function index(req, res) {
+  const flights = await Flight.find({});
+  res.render("flights/index", {
+    title: "All Flights",
+    flights,
+  });
+}
+
+// Create a GET /flights/:id route in controllers/flights.js to handle the detail view:
+async function show(req, res) {
+  const flight = await Flight.findById(req.params.id);
+  res.render("flights/show", { title: "Flight Detail", flight });
+}
 
 function newFlight(req, res) {
   res.render("flights/new", {
+    title: "Add New Flight",
     errorMsg: "Error, flight not created!",
   });
 }
@@ -22,46 +36,7 @@ async function create(req, res) {
     res.redirect("/flights");
   } catch (err) {
     // Typically some sort of validation error
-    console.log(err);
+
     res.render("flights/new", { errorMsg: err.message });
-  }
-}
-// Create a POST /flights/: id/destinations route in controllers/flights.js to handle adding the destination:
-
-async function addDestination(req, res) {
-  try {
-    // Get the flight from the request parameters
-    const flight = await Flight.findById(req.params.id);
-
-    // Add the destination to the flight's destinations array
-    flight.destinations.push(req.body);
-
-    // Save the flight
-    await flight.save();
-
-    // Redirect back to the flight's show page
-    res.redirect(`/flights/${flight._id}`);
-  } catch (err) {
-    console.log(err);
-    res.render("flights/new", { errorMsg: err.message });
-  }
-}
-
-async function index(req, res) {
-  const allFlights = await Flight.find({});
-  res.render("flights/index", {
-    title: "All Flights",
-    allFlights,
-  });
-}
-
-// Create a GET /flights/:id route in controllers/flights.js to handle the detail view:
-async function show(req, res) {
-  const { id } = req.params;
-  try {
-    const flight = await Flight.findById(id);
-    res.render("flights/show", { flight });
-  } catch (err) {
-    res.redirect("/flights");
   }
 }

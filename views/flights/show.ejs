@@ -4,29 +4,40 @@
   <h2>Flight Details</h2>
   <p>Airline: <%= flight.airline %></p> 
   <p>Airport: <%= flight.airport %></p>
-  <p>Destination: <%= flight.destination %></p>
+
   <p>Flight No: <%= flight.flightNo %></p>
   <p>Departs: <%= flight.departs.toDateString() %></p>
-  <a href="/flights">Back to Flights</a>
+
 </body>
 
-<form method="POST" action="/flights/<%= flight._id %>/destinations">
+<fform method="POST" action="/flights/<%= flight._id %>/destinations" enctype="application/json">
   <label>Airport Code: 
     <input type="text" name="airport">
   </label>
   <label>Arrival Date: 
     <input type="datetime-local" name="arrival">
   </label>
-  <button type="submit">Add Destination</button>
+  <input type="submit" onclick="submitForm(event)">
 </form> 
 
-<% if (flight.destinations.length) { %> 
-  <h3>Destinations</h3>
-  <% flight.destinations.forEach(dest => { %>
-  <p>Airport: <%= dest.airport %>, Arrives: <%= dest.arrival.toDateString() %></p>  
-  <% }) %>
-<% } %> 
-
+<script>
+  function submitForm(event) {
+    event.preventDefault();
+    fetch('/flights/<%= flight._id %>/destinations', {
+      method: 'POST', 
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        airport: event.target.airport.value,
+        arrival: event.target.arrival.value
+      })
+    })
+    .then(res => res.json())
+    .then(flight => {
+      // Re-render show view with updated flight
+    })
+  }
+  </script> 
+  
 <a href="/flights">Back to Flights</a> 
 
 <%- include('../partials/footer') %>
