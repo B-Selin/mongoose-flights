@@ -1,4 +1,4 @@
-<%- include('./partials/header') %>
+<%- include('../partials/header') %>
 
 <h2>Home Page</h2>
 
@@ -8,23 +8,27 @@
      <tr>
        <th>Airline</th>
        <th>Airport</th>
+       <th>Destination</th>
        <th>Flight No</th>
        <th>Departure</th>
-
+       <th>More Info</th>
      </tr>
    </thead>
    <tbody>
      <!-- Write the line of EJS to iterate over movies using forEach -->
-     <% flights.forEach(f => { %>
+     <% allFlights.forEach(f => { %>
        <tr>
          <td><%= f.airline %></td>
          <td><%= f.airport %></td>
+         <td><%= f.destination %></td>
          <td><%= f.flightNo %></td>
          <td><%= f.departs %></td>
+         <td><a href="/flights/show"<%=f._id %>>Details</a></td>
        </tr>
+
       <% }) %>
      <!-- Close the forEach using EJS here -->
    </tbody>
  </table>
 
- <%- include('./partials/footer') %>
+ <%- include('../partials/footer') %>

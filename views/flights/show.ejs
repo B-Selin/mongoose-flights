@@ -1,0 +1,32 @@
+<%- include('../partials/header') %>
+
+<body>
+  <h2>Flight Details</h2>
+  <p>Airline: <%= flight.airline %></p> 
+  <p>Airport: <%= flight.airport %></p>
+  <p>Destination: <%= flight.destination %></p>
+  <p>Flight No: <%= flight.flightNo %></p>
+  <p>Departs: <%= flight.departs.toDateString() %></p>
+  <a href="/flights">Back to Flights</a>
+</body>
+
+<form method="POST" action="/flights/<%= flight._id %>/destinations">
+  <label>Airport Code: 
+    <input type="text" name="airport">
+  </label>
+  <label>Arrival Date: 
+    <input type="datetime-local" name="arrival">
+  </label>
+  <button type="submit">Add Destination</button>
+</form> 
+
+<% if (flight.destinations.length) { %> 
+  <h3>Destinations</h3>
+  <% flight.destinations.forEach(dest => { %>
+  <p>Airport: <%= dest.airport %>, Arrives: <%= dest.arrival.toDateString() %></p>  
+  <% }) %>
+<% } %> 
+
+<a href="/flights">Back to Flights</a> 
+
+<%- include('../partials/footer') %>
