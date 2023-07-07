@@ -11,12 +11,14 @@ async function addDestination(req, res) {
   // Get the flight from the request parameters
   try {
     const flight = await Flight.findById(req.params.id);
+    console.log(flight);
     flight.destinations.push(req.body);
+
     await flight.save();
     console.log(flight);
     res.redirect(`/flights/${flight._id}`);
   } catch (err) {
     console.log(err);
-    res.render("flights/show", { errorMsg: err.message });
+    res.render("flights/show", { title: "Flight Detail", flight });
   }
 }

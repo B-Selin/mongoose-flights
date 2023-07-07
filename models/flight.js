@@ -67,9 +67,8 @@ const flightSchema = new Schema(
       required: [true, "Please provide an airport"],
       default: "IST",
     },
-    destinations: {
-      type: destinationSchema,
-    },
+    destinations: [destinationSchema],
+
     // <!-- flightNo field will have a range of numbers between 10 and 9999 and required -->
     flightNo: {
       type: Number,

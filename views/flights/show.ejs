@@ -3,14 +3,14 @@
 <body>
   <h2>Flight Details</h2>
   <p>Airline: <%= flight.airline %></p> 
-  <p>Airport: <%= flight.airport %></p>
-
+  <p>Departure Airport: <%= flight.airport %></p>
+  <p>Arrival Airport: <%= flight.destinations[0].airport %></p>
   <p>Flight No: <%= flight.flightNo %></p>
   <p>Departs: <%= flight.departs.toDateString() %></p>
 
 </body>
 
-<fform method="POST" action="/flights/<%= flight._id %>/destinations" enctype="application/json">
+<form method="POST" action="/flights/<%= flight._id %>/destinations" enctype="application/json">
   <label>Airport Code: 
     <input type="text" name="airport">
   </label>
@@ -20,23 +20,7 @@
   <input type="submit" onclick="submitForm(event)">
 </form> 
 
-<script>
-  function submitForm(event) {
-    event.preventDefault();
-    fetch('/flights/<%= flight._id %>/destinations', {
-      method: 'POST', 
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        airport: event.target.airport.value,
-        arrival: event.target.arrival.value
-      })
-    })
-    .then(res => res.json())
-    .then(flight => {
-      // Re-render show view with updated flight
-    })
-  }
-  </script> 
+
   
 <a href="/flights">Back to Flights</a> 
 
