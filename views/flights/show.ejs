@@ -20,36 +20,14 @@
   <input type="submit" onclick="submitForm(event)">
 </form> 
 
-<!-- AAU, when viewing the detail page for a flight, I want to view a list of the tickets that have been created for that flight -->
 
-<!-- start tickets list -->
-<h3>Tickets</h3>
-<table>
-  <thead>
-    <tr>
-
-      <th>Seat Number</th>
-      <th>Ticket Price</th>
-    </tr>
-    </thead>  
-  <tbody>
-    <% flight.ticket.forEach(ticket => { %>
-    <tr>
-
-      <td><%= ticket.seat %></td>
-      <td><%= ticket.price %></td> 
-    </tr>
-    <% }) %>
-  </tbody>
-  </table>
-<!-- End tickets list -->
 
 <!-- Also on the flight’s show view, display a New Ticket link (perhaps styled to look like a button) When the form is submitted, create the ticket on the server and redirect back to the flight’s show view. -->
 
-  <form action="/flights/<%=flight._id %>/tickets" method="POST">
+  <form id="add-ticket-form" action="/flights/<%=flight._id %>/tickets" method="POST">
     <!-- add two form elements to add ticket seat number and price  -->
     <label>Seat Number
-      <input type="text" name="seat">
+      <input required pattern="[A-F][1-9]\d?" name="seat">
     </label>
      <label>Ticket Price
       <input type="number">
@@ -60,5 +38,9 @@
 
   
 <a href="/flights">Back to Flights</a> 
+
+<!-- AAU, when viewing the detail page for a flight, I want to view a list of the tickets that have been created for that flight -->
+
+
 
 <%- include('../partials/footer') %>

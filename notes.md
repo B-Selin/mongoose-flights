@@ -15,3 +15,30 @@
     })
   }
   </script>  -->
+
+<!-- start tickets list -->
+
+<% if (flight.ticket && flight.tickets.length > 0) { %>
+
+  <h3>Tickets</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Seat Number</th>
+        <th>Ticket Price</th>
+      </tr>
+    </thead>
+  
+    <tbody>
+      <% flight.tickets.forEach(ticket => { %>
+      <tr>
+        <td><%= ticket.seat %></td>
+        <td><%= ticket.price %></td>
+      </tr>
+      <% }) %>
+    </tbody>
+    </table>
+    <% } else { %>
+      <p>No tickets found for this flight.</p>
+    <% } %>
+  <!-- End tickets list -->

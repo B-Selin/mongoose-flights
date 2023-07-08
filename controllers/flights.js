@@ -10,10 +10,7 @@ module.exports = {
 
 async function index(req, res) {
   const flights = await Flight.find({});
-  res.render("flights/index", {
-    title: "All Flights",
-    flights,
-  });
+  res.render("flights/index", { title: "All Flights", flights });
 }
 
 // Create a GET /flights/:id route in controllers/flights.js to handle the detail view:
@@ -37,10 +34,10 @@ function newFlight(req, res) {
 
 async function create(req, res) {
   try {
-    await Flight.create(req.body);
+    const flight = await Flight.create(req.body);
     // Always redirect after CUDing data
     // We'll refactor to redirect to the movies index after we implement it
-    res.redirect("/flights");
+    res.redirect(`/flights/${flight._id}`);
   } catch (err) {
     // Typically some sort of validation error
 
