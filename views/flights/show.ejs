@@ -9,7 +9,29 @@
 
 </body>
 
+<!-- start arrivals list -->
 
+<% if (flight.destinations && flight.destinations.length > 0) { %>
+  <h3>Arrivals</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Destination Airport</th>
+        <th>Arrival Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% flight.destinations.forEach(arrival => { %>
+        <tr>
+          <td><%= arrival.airport %></td>
+          <td><%= arrival.date.toDateString() %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+<% } else { %>
+  <p>No arrivals found for this flight.</p> 
+<% } %>
 
 
 <form method="POST" action="/flights/<%= flight._id %>/destinations" enctype="application/json">
