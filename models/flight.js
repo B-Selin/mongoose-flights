@@ -81,7 +81,9 @@ const flightSchema = new Schema(
       type: Date,
       default: Date.now() + 365 * 24 * 60 * 60 * 1000,
     },
-    ticket: [
+
+    // Had to be tickets, instead of ticket
+    tickets: [
       {
         type: Schema.Types.ObjectId,
         ref: "Ticket",

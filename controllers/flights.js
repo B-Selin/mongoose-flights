@@ -15,7 +15,10 @@ async function index(req, res) {
 
 // Create a GET /flights/:id route in controllers/flights.js to handle the detail view:
 async function show(req, res) {
-  const flight = await Flight.findById(req.params.id);
+  const flight = await Flight.findById(req.params.id).populate({
+    path: "tickets",
+    strictPopulate: false,
+  });
   const tickets = await Ticket.find({ flight: flight._id });
   res.render("flights/show", {
     title: `Flight ${flight.number} Details`,

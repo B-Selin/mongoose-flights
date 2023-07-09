@@ -13,8 +13,10 @@ async function addToTickets(req, res) {
     res.render("tickets/new", { errorMsg: "Invalid flight ID" });
     return;
   }
-  // The tickets array holds the tickets's ObjectId (referencing)
-  flight.ticket.push(req.body.ticketId);
+
+  // ticket was not actually being created, I had to create a new const as "ticket" and change the flight.ticket to flight tickets
+  const ticket = await Ticket.create(req.body);
+  flight.tickets.push(ticket);
   await flight.save();
   res.redirect(`/flights/${flight._id}`);
 }

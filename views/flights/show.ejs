@@ -4,11 +4,13 @@
   <h2>Flight Details</h2>
   <p>Airline: <%= flight.airline %></p> 
   <p>Departure Airport: <%= flight.airport %></p>
-  <p>Arrival Airport: <%= flight.destinations.airport %></p>
   <p>Flight No: <%= flight.flightNo %></p>
   <p>Departs: <%= flight.departs.toDateString() %></p>
 
 </body>
+
+
+
 
 <form method="POST" action="/flights/<%= flight._id %>/destinations" enctype="application/json">
   <label>Airport Code: 
@@ -20,7 +22,29 @@
   <input type="submit" onclick="submitForm(event)">
 </form> 
 
+<!-- start tickets list -->
 
+  <% if (flight.tickets && flight.tickets.length > 0) { %>
+    <h3>Tickets</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Seat Number</th>
+          <th>Ticket Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% flight.tickets.forEach(ticket => { %>
+          <tr>
+            <td><%= ticket.seat %></td>
+            <td><%= ticket.price %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } else { %>
+    <p>No tickets found for this flight.</p> 
+  <% } %>
 
 <!-- Also on the flight’s show view, display a New Ticket link (perhaps styled to look like a button) When the form is submitted, create the ticket on the server and redirect back to the flight’s show view. -->
 
