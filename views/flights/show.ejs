@@ -24,7 +24,7 @@
       <% flight.destinations.forEach(arrival => { %>
         <tr>
           <td><%= arrival.airport %></td>
-          <td><%= arrival.date %></td>
+          <td><%= arrival.arrival.toDateString() %></td>
         </tr>
       <% }) %>
     </tbody>
@@ -76,7 +76,7 @@
       <input required pattern="[A-F][1-9]\d?" name="seat">
     </label>
      <label>Ticket Price
-      <input type="number">
+      <input type="number" name="price">
     </label>
     <button type="submit">New Ticket</button>
 </form>
