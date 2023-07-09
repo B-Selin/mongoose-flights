@@ -73,7 +73,7 @@
   <form id="add-ticket-form" action="/flights/<%=flight._id %>/tickets" method="POST">
     <!-- add two form elements to add ticket seat number and price  -->
     <label>Seat Number
-      <input required pattern="[A-F][1-9]\d?" name="seat">
+      <input required pattern="^[1-9][0-9]?([A-F])$" name="seat">
     </label>
      <label>Ticket Price
       <input type="number" name="price">
