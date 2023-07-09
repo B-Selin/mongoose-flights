@@ -10,7 +10,9 @@ module.exports = {
 async function addDestination(req, res) {
   const flight = await Flight.findById(req.params.id);
   // Get the flight from the request parameters
+  const destination = req.body;
   try {
+    flight.destinations.push(destination);
     await flight.save();
     console.log(flight);
     res.redirect(`/flights/${flight._id}`);
